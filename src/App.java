@@ -5,12 +5,11 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // Fazer uma conexão HTTP e armazenar o top 250 filmes numa String
-        // String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-        // ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
 
-        String url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
-        ExtratorDeConteudo extrator = new ExtratorConteudoNasa();
+        // Fazer uma conexão HTTP e armazenar o top 250 filmes numa String
+        API api = API.NASA; // or API api = API.IMDB_TOP_MOVIES;
+        String url = api.getUrl();
+        ExtratorDeConteudo extrator = api.getExtrator();
 
         var http = new ClienteHttp();
         String json = http.buscaDados(url);
