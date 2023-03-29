@@ -7,4 +7,4 @@ English:
 This is my project that I made following Alura's second Java immersion!
 In it I make HTTP connection, consumption of API's, use of Java libraries, use of JSON, etc...
 
-![WhatsApp Image 2023-03-27 at 20 25 05](https://user-images.githubusercontent.com/127412448/228089055-e81d8aad-f0d6-4e89-bf0d-f6b86e7b9b90.jpeg)
+![WhatsApp Image 2023-03-29 at 17 15 51](https://user-images.githubusercontent.com/127412448/228657050-bd884d4e-900c-41e3-a784-2a25251d7df0.jpeg)
