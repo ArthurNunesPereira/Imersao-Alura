@@ -12,7 +12,8 @@ import java.util.Map;
 public class App {
     public static void main(String[] args) throws Exception {
         // Fazer uma conexão HTTP e armazenar o top 250 filmes numa String
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        // String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        String url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
         URI endereco = URI.create(url);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(endereco).GET().build();
@@ -25,24 +26,19 @@ public class App {
 
         // Exibir e manipular os dados
         var geradora = new GeradoraDeFigurinhas();
-        var diretorio = new File("figurinhas/");
+        var diretorio = new File("saida/");
         diretorio.mkdir();
-        for (Map<String,String> filme : listaDeFilmes) {
-            String urlImagem = filme.get("image");
+        for (int i = 0; i < 3; i++) {
+            Map<String,String> filme = listaDeFilmes.get(i);
+
+            String urlImagem = filme.get("url").replaceAll("(@+)(.*).jpg$", "$1.jpg");
             String titulo = filme.get("title");
 
             InputStream inputStream = new URL(urlImagem).openStream();
-            
-            String nomeArquivo = "figurinhas/" + titulo.replace(":","") + ".png";
+            String nomeArquivo = "saida/" + titulo.replace(":","") + ".png";
             geradora.cria(inputStream, nomeArquivo);
 
             System.out.println(titulo);
-            System.out.println("\u001b[35m\u001b[45m Rating:\u001b[m" + "\u001b[35m\u001b[45m" + filme.get("imDbRating") + " \u001b[m");
-            double classificacao = Double.parseDouble(filme.get("imDbRating"));
-            int numEstrelas = (int)classificacao;
-            for (int i = 0; i < numEstrelas ; i++) {
-                System.out.print("⭐");
-            }
             System.out.println("\n");
         }
     }
