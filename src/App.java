@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -14,22 +13,21 @@ public class App {
         String json = http.buscaDados(url);
 
         // Exibir e manipular os dados
+        ExtratorConteudoNasa extrator = new ExtratorConteudoNasa();
+        List<Conteudo> conteudos = extrator.extraionteudos(json);
+
         var geradora = new GeradoraDeFigurinhas();
         var diretorio = new File("saida/");
         diretorio.mkdir();
 
         for (int i = 0; i < 3; i++) {
-            Map<String,String> conteudo = listaDeConteudos.get(i);
+            Conteudo conteudo = conteudos.get(i);
 
-            // conteudo.get("image")
-            String urlImagem = conteudo.get("url").replaceAll("(@+)(.*).jpg$", "$1.jpg");
-            String titulo = conteudo.get("title");
-
-            InputStream inputStream = new URL(urlImagem).openStream();
-            String nomeArquivo = "saida/" + titulo.replace(":","") + ".png";
+            InputStream inputStream = new URL(conteudo.getUrlImagem()).openStream();
+            String nomeArquivo = "saida/" + conteudo.getTitulo().replace(":","") + ".png";
             geradora.cria(inputStream, nomeArquivo);
 
-            System.out.println(titulo);
+            System.out.println(conteudo.getTitulo());
             System.out.println("\n");
         }
     }
