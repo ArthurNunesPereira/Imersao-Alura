@@ -18,14 +18,14 @@ public class App {
         List<Conteudo> conteudos = extrator.extraiconteudos(json);
 
         var geradora = new GeradoraDeFigurinhas();
-        var diretorio = new File("saida/");
+        var diretorio = new File("ALURA-STICKERS/saida/");
         diretorio.mkdir();
 
         for (int i = 0; i < 3; i++) {
             Conteudo conteudo = conteudos.get(i);
 
             InputStream inputStream = new URL(conteudo.urlImagem()).openStream();
-            String nomeArquivo = "saida/" + conteudo.titulo().replace(":","") + ".png";
+            String nomeArquivo = "ALURA-STICKERS/saida/" + conteudo.titulo().replace(":","") + ".png";
             geradora.cria(inputStream, nomeArquivo);
 
             System.out.println(conteudo.titulo());
