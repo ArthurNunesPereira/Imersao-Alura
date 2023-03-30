@@ -7,9 +7,12 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // Fazer uma conexão HTTP e armazenar o top 250 filmes numa String
-        API api = API.NASA; // or API api = API.IMDB_TOP_MOVIES;
-        String url = api.getUrl();
-        ExtratorDeConteudo extrator = api.getExtrator();
+        // API api = API.NASA; // or API api = API.IMDB_TOP_MOVIES;
+        // String url = api.getUrl();
+        // ExtratorDeConteudo extrator = api.getExtrator();
+
+        String url = "http://localhost:8080/linguagens";
+        ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
 
         var http = new ClienteHttp();
         String json = http.buscaDados(url);
