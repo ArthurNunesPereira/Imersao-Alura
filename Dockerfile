@@ -1,4 +1,4 @@
-FROM openjdk:20-jdk-alpine
+FROM openjdk:19-jdk
 VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
